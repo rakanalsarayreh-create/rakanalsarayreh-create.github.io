@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QS Global Academic Survey</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+<style>
+body{
+  background: url("background.webp") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.form-card{
+  background:white;
+  border-radius:10px;
+  padding:25px;
+  box-shadow:0 0 10px rgba(0,0,0,.1)
+}
+
+label span{color:red}
+
+/* ===== HEADER ===== */
+.jus-header{
+  background:#00000;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:25px;
+}
+
+.jus-header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.jus-logo img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+}
+
+.jus-text{
+  text-align:left;
+  line-height:1.4;
+}
+
+.jus-title{
+  color:#0d6efd;
+  font-size:26px;
+  font-weight:700;
+}
+
+.jus-subtitle{
+  color:#0d6efd;
+  font-size:16px;
+}
+
+.jus-forms{
+  font-size:16px;
+  margin-top:5px;
+}
+
+.qs-header{
+  background:#cfe8f3;          /* أزرق فاتح مثل الصورة */
+  color:#2a6f8f;               /* لون النص */
+  font-size:28px;
+  font-weight:500;
+  padding:18px 25px;
+  border-radius:6px;
+  margin-bottom:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container my-4">
+<div class="form-card">
+
+<!-- ===== HEADER ===== -->
+<div class="jus-header">
+  <div class="jus-header-inner">
+
+    <!-- TEXT LEFT -->
+    <div class="jus-text">
+      <div class="jus-title">Irbid National University</div>
+      <div class="jus-subtitle">Deanship of Academic Development and Quality Assurance</div>
+      <div class="jus-forms">Electronic Forms</div>
+    </div>
+
+    <!-- LOGO RIGHT -->
+    <div class="jus-logo">
+      <img src="logo.jpg" alt="Logo">
+    </div>
+
+  </div>
+</div>
+
+<form id="surveyForm">
+<div class="qs-header">
+  QS Global Academic Survey
+</div>
+<div class="row g-3">
+
+<div class="col-md-6">
+<label>Title <span>*</span></label>
+<select class="form-select" required>
+<option value="">Select</option>
+<option>Prof.</option><option>Dr.</option><option>Mr.</option><option>Ms.</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Phone</label>
+<input class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>First Name <span>*</span></label>
+<input class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Last Name <span>*</span></label>
+<input class="form-control" required>
+</div>
+
+<div class="col-md-6">
+<label>Email <span>*</span></label>
+<input type="email" class="form-control" required>
+</div>
+
+
+<div class="col-md-6">
+<label>Language<span>*</span></label>
+<select class="form-select">
+<option>Arabic</option><option>English</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Department<span>*</span></label>
+<input class="form-control"required>
+</div>
+
+<div class="col-md-6">
+<label>Institution<span>*</span></label>
+<input class="form-control">
+</div>
+
+
+<div class="col-md-6">
+<label>Location</label>
+<select class="form-select select2">
+<option>Jordan</option><option>UAE</option><option>Saudi Arabia</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Consent</label>
+<select class="form-select">
+<option value="0">Do you consent for Irbid National University to share your contact with QS Intelligence Unit? *</option>
+<option value="Yes">Yes. I consent for Irbid National University to share my contact with QS Intelligence Unit</option>
+<option value="No">No. I do not consent for Irbid National University to share my contact with QS Intelligence Unit</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label>Name of person who asked you to complete this form <span>*</span></label>
+<select class="form-select" required>
+<option value="">Select</option>
+<option>Prof. Majed Abu-Zreig</option>
+<option>Prof. Mohamed Ibrahim Mugableh</option>
+</select>
+</div>
+
+</div>
+
+<div class="mt-4 text-end">
+<button class="btn btn-primary px-4">Submit</button>
+</div>
+
+</form>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<script>
+$('.select2').select2({width:'100%'});
+
+document.getElementById("surveyForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const row = {
+        "Title": document.querySelectorAll("select")[0].value,
+        "Phone": document.querySelectorAll("input")[0].value,
+        "First Name": document.querySelectorAll("input")[1].value,
+        "Last Name": document.querySelectorAll("input")[2].value,
+        "Email": document.querySelectorAll("input")[3].value,
+        "Gender": document.querySelectorAll("select")[1].value,
+        "Language": document.querySelectorAll("select")[2].value,
+        "Department": document.querySelectorAll("input")[4].value,
+        "Institution": document.querySelectorAll("input")[5].value,
+        "Job": document.querySelectorAll("select")[3].value,
+        "Location": document.querySelectorAll("select")[4].value,
+        "Consent": document.querySelectorAll("select")[5].value,
+        "Asked By": document.querySelectorAll("select")[6].value
+    };
+
+    const ws = XLSX.utils.json_to_sheet([row]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Survey");
+    XLSX.writeFile(wb, "QS_Survey_Result.xlsx");
+
+    this.reset();
+    alert("تم تنزيل ملف الإكسل ✅");
+});
+</script>
+
+</body>
+</html>
